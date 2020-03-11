@@ -1,12 +1,9 @@
 const express = require("express");
-const path = require("path");
-const PORT = process.env.PORT || 3001;
+const mongoose = require("mongoose");
 const routes = require("./routes");
 const app = express();
-const mongoose = require("mongoose");
+const path = require("path");
 const PORT = process.env.PORT || 3001;
-
-
 
 // Define middleware here
 app.use(express.urlencoded({ extended: true }));
@@ -22,7 +19,7 @@ if (process.env.NODE_ENV === "production") {
 // Define any API routes before this runs
 app.use(routes);
 
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/reactreadinglist");
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/googlebooks");
 
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "./client/build/index.html"));
